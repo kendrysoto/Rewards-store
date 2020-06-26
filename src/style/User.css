@@ -1,0 +1,28 @@
+.users-box{
+    height: 40px;
+}
+.users-name{
+    float: left; 
+    margin-top: 20px; 
+    margin-left: 71em; 
+}
+.user-img{
+    width: 22%;
+ height: 16px;  
+ margin-left: 8px; 
+ margin-top: 8px; 
+
+
+
+}
+.users-points{
+   background-color: #F5F5F5;
+  width: 6%;
+  height: auto;
+  padding: 5px;
+  float: right;
+   border-radius: 18px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-right: 50px;
+}

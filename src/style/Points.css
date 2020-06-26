@@ -1,0 +1,39 @@
+.points-box{
+    margin-top: 10px;
+ 
+ width: 30%;
+ align-items: center;
+
+ margin-left: 500px;
+    
+}
+
+.points-h3{
+    color: #6ee8ff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.points-select{
+width: 20%;
+align-content: center;
+height: auto;
+font-size: 17px;
+margin-bottom: 20px;
+color: #A9A9A9;
+border-color: #6ee8ff;
+}
+
+.points-button{
+    font-size: 17px;
+    border: 0px;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: white;
+background-color: #6ee8ff;
+width: 20%;
+height: auto;
+margin-bottom: 30px;
+}
