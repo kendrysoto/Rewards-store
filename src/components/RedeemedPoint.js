@@ -21,7 +21,7 @@ const RedeemedPoint = ()=> {
     useEffect(() => {
 
 
-        fetch( 'https://private-anon-9a56df0539-aerolabchallenge.apiary-mock.com/user/history', { headers })
+        fetch( 'https://coding-challenge-api.aerolab.co/user/history', { headers })
        
             .then(function (response) {
                 return response.json();
@@ -46,15 +46,11 @@ const RedeemedPoint = ()=> {
     
         {state.historial.map((hist) =>
             <div className="Category-container" key={hist._id}>
-                
-               
-               
-                
                 <img  className="ProducList-img" src={hist.img.url} />
                 <hr className="hr2"></hr>
                 <p className="ProducList-category">{hist.category}</p>
                 <h3 className="ProducList-name">{hist.name}</h3>
-                {hist.redeemHistory}
+               
             </div>
         )}
 

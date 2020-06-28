@@ -20,7 +20,7 @@ const User = ()=> {
     useEffect(() => {
 
 
-        fetch( `${config.config.UrlBase}/user/me`, { headers })
+        fetch( "https://coding-challenge-api.aerolab.co/user/me", { headers })
        
             .then(function (response) {
                 return response.json();
@@ -42,10 +42,12 @@ const User = ()=> {
 
     return (
         <div className="users-box">
-        <p className="users-name">{state.users.name} </p>
       
+        <p className="users-name">{state.users.name} </p>
+       
+       
         <p className="users-points">{state.users.points}<img  className="user-img" src="https://i.ibb.co/xGs19gB/icon-img.png" /></p>
-        
+       
     </div>
     )
 }
