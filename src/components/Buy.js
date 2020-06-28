@@ -57,7 +57,7 @@ const Buy = () => {
         console.log(id)
         console.log(typeof id)
         console.log("MMMMMMMMMMMMMMMMMMMMMM")
-        fetch('https://private-anon-9a56df0539-aerolabchallenge.apiary-mock.com/redeem', {
+        fetch('https://coding-challenge-api.aerolab.co/redeem', {
             method: 'POST',
             mode: "cors",
             redirect: 'follow',
