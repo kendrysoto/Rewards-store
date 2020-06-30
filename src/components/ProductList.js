@@ -1,35 +1,41 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import config from '../config.json';
 import headers from '../utils/HeadersRequired';
+import '../style/User.css';
 import ProductReducer from '../reducers/productReducers';
-import userReducer from '../reducers/userReducer';
 import '../style/ProductList.css';
-import Buy from './Buy';
-
-
-
-
-const initialState1 = {
-    loading: true,
-    error: '',
-    posts: [],
-    users: [],
-}
-const initialState2 = {
-    loading: true,
-    error: '',
-    users: [],
-}
+import UsePagination from './UsePagination';
 
 
 
 const ProductList = () => {
-    const [state, dispatch] = useReducer(ProductReducer, initialState1)
-    
+    const initialState = {
+        loading: true,
+        error: '',
+        posts: [],
+        users: [],
+    }
+    const itemsPerPage2 = 2;
+    const [state, dispatch] = useReducer(ProductReducer, initialState)
+    const [buy, setBuy] = useState({
+        point: 0,
+        product: [],
+        mesagge: '',
+    });
 
     useEffect(() => {
-        fetch( "https://coding-challenge-api.aerolab.co/products", { headers })
-       
+        fetch(`${config.config.UrlBase}/user/me`, { headers })
+
+            .then(response => response.json())
+            .then(jsondata => {
+                setBuy({ point: jsondata['points'] })
+            })
+            .catch(error => {
+                console.log(error)
+            });
+
+        fetch("https://coding-challenge-api.aerolab.co/products", { headers })
+
             .then(function (response) {
                 return response.json();
             }).then(function (data) {
@@ -39,32 +45,43 @@ const ProductList = () => {
             .catch(error => {
                 dispatch({ type: 'FETCH_ERROR' })
             });
-            }, []);
+    }, []);
 
-     
+    const fechPoints = (id) => {
+        fetch('https://coding-challenge-api.aerolab.co/redeem', {
+            method: 'POST',
+            mode: "cors",
+            redirect: 'follow',
+            body: JSON.stringify(
+                { 'productId': id }
 
+            ),
+            headers: {
+                "content-type": "application/json",
+                "Accept": "application/json",
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWRkOWU5OTQ0NGZlNDAwNmRhOTkyNGQiLCJpYXQiOjE1OTE1ODIzNjF9.-f40dyUIGFsBSB_PTeBGdSLI58I21-QBJNi9wkODcKk"
+            }
+        })
+            .then(response => response.json())
+            .then(jsondata => {
+                setBuy({ product: jsondata['_id'] })
+                setBuy({ message: jsondata['message'] })
+            })
 
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     return (
-        <div >
-    
-            {state.posts.map((product) =>
-                <div className="Category-container" key={product._id}>
-                    
-                   
-                    {product.cost > 1000 ?  + (product.cost - 1000) : "mostrar boton comprar"}
-                    
-                    <img  className="ProducList-img" src={product.img.url} />
-                    <hr className="hr2"></hr>
-                    <p className="ProducList-category">{product.category}</p>
-                    <h3 className="ProducList-name">{product.name}</h3>
-                    
-                </div>
-            )}
 
-
+        <div>
+            
+            <UsePagination  data={state.posts} itemsPerPage={itemsPerPage2}  buy={buy} fechPoints={fechPoints}/>
+            
         </div>
     )
 }
 
 export default ProductList;
+

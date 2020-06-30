@@ -1,9 +1,33 @@
+.point-img{
+    width: 10%;
+    height: auto;  
+    margin-left: 105px; 
+    float: left;
+}
+
+.point-p{
+    padding: 5px;
+   
+}
+
+.ProducList-point{
+   margin-left: 15px;
+   border-radius: 30px;
+ 
+    margin-top: 18px;
+    width: 60%;
+    background-color: khaki;
+    
+    
+}
+
+
 .ProducList-button{
     background-color: white;
     border: 0px;
     float: right;
     width: 25%;  
-    margin-top: 5px;
+    margin-top: 2px;
     margin-right: 10px;
 }
 
@@ -20,17 +44,18 @@
     margin-left: 13px;
 }
 .ProducList-category{
-    
+    margin: 0px;
     text-align: left;
     margin-left: 13px;
 }
 
 .ProducList-name{
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     text-align: left;
     margin-left:13px; 
     font-size: 16px; 
     font-weight: bold;
+    margin-top: 4px;
   
 }
 .Category-container{
@@ -55,4 +80,7 @@
     width: 100%;
     height: auto;
 }
+
+
+
 

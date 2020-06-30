@@ -14,17 +14,7 @@ const Points = () => {
     });
 
 
-    /*const changeHandler = e => {
-        console.log()
-        console.log(e.target)
-        amount[e.target.name] = e.target.value;
-        setAmount({ ...amount })
-    }*/
-
-    const submitHandler = () => {
-        console.log(point.amount)
-        console.log(typeof point.amount)
-
+    const fechPoints = () => {
         fetch('https://coding-challenge-api.aerolab.co/user/points', {
             method: 'POST',
             mode: "cors",
@@ -41,8 +31,6 @@ const Points = () => {
             .then(response => response.json())
             .then(jsondata => {
                 setPoint({ message: jsondata['message'] + " " + jsondata['New Points'] })
-                console.log(jsondata['message'])
-                console.log(jsondata)
             })
 
             .catch(error => {
@@ -53,21 +41,17 @@ const Points = () => {
 
     return (
         <div className="points-box">
-
             <div>
                 <h2 className="points-h3">Add your points</h2>
-
                 <select className="points-select">
                     <option value={point.amount1} selected>1000</option>
                     <option value={point.amount2} >5000</option>
                     <option value={point.amount3}>7500</option>
                 </select>
             </div>
-
             <button
                 className="points-button"
-                onClick={submitHandler}>click</button>
-
+                onClick={fechPoints}>click</button>
             <p className="points-message">{point.message}</p>
         </div>
 

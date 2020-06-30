@@ -90,7 +90,7 @@ const LowestPrice = () => {
 
     return (
         <div >
-            {state.posts.filter(prices => prices.cost < 300).map(product => (
+            {state.posts.filter(prices => prices.cost < 240).map(product => (
                 <div className="Category-container" key={product._id}>
                      {product.cost > buy.point ? "Te faltan " + (product.cost - buy.point) : <button className="ProducList-button" onClick={submitHandler}> <img  className="product-img" src="https://i.ibb.co/JCghNXv/buy-white11.jpg" /> </button>}
                     <img  className="ProducList-img" src={product.img.url} />
