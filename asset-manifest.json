@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Rewards-store/static/css/main.de315909.chunk.css",
+    "main.js": "/Rewards-store/static/js/main.d14b234f.chunk.js",
+    "main.js.map": "/Rewards-store/static/js/main.d14b234f.chunk.js.map",
+    "runtime-main.js": "/Rewards-store/static/js/runtime-main.ffbe5917.js",
+    "runtime-main.js.map": "/Rewards-store/static/js/runtime-main.ffbe5917.js.map",
+    "static/js/2.0e292eaf.chunk.js": "/Rewards-store/static/js/2.0e292eaf.chunk.js",
+    "static/js/2.0e292eaf.chunk.js.map": "/Rewards-store/static/js/2.0e292eaf.chunk.js.map",
+    "index.html": "/Rewards-store/index.html",
+    "precache-manifest.3ae7c969cbcc649783715c339607dda0.js": "/Rewards-store/precache-manifest.3ae7c969cbcc649783715c339607dda0.js",
+    "service-worker.js": "/Rewards-store/service-worker.js",
+    "static/css/main.de315909.chunk.css.map": "/Rewards-store/static/css/main.de315909.chunk.css.map",
+    "static/js/2.0e292eaf.chunk.js.LICENSE.txt": "/Rewards-store/static/js/2.0e292eaf.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ffbe5917.js",
+    "static/js/2.0e292eaf.chunk.js",
+    "static/css/main.de315909.chunk.css",
+    "static/js/main.d14b234f.chunk.js"
+  ]
+}
