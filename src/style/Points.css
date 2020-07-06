@@ -34,3 +34,21 @@
     height: auto;
     margin-bottom: 30px;
 }
+
+
+@media screen and (max-width: 800px) {   
+    .points-box{
+        width: 80%;
+        align-items: center;
+        margin-left: 100px; 
+    }
+}
+
+@media (max-width: 400px) { 
+    .points-box{
+       
+        width: 80%;
+        align-items: center;
+        margin-left: 10px; 
+    }
+}

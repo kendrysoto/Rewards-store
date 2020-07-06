@@ -23,7 +23,7 @@ function Header() {
         <div id="menuA">
           <div href="#" className="showhim"><span className="menumov"> &#8803;</span>
             <div className="showme">
-              <li>Sort by:</li>
+              <li className="menu-li">Sort by:</li>
               <li><Link to="/" >Most recent</Link></li>
               <li><Link to="/LowestPrice" >Lowest Price</Link></li>
               <li><Link to="/HighestPrice" >Highest Price</Link></li>

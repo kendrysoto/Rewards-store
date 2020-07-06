@@ -76,6 +76,30 @@
     height: auto;
 }
 
+@media screen and (max-width: 800px) {   
+    .Category-container{
+        width:40%;
+        height:auto;
+        position:relative;
+        left: 50px;
+        top: 10px;
+        margin: 20px;
+        
+    } 
+}
+
+@media (max-width: 400px) { 
+    .Category-container{
+        width:80%;
+        height:auto;
+        position:relative;
+        left: 30px;
+        top: 10px;
+        
+    } 
+}
+
+
 
 
 

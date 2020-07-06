@@ -158,40 +158,50 @@ nav a:hover{
     background: white;
 }
 
-@media screen and (min-width: 1000px){
-   
-    #menuA{
-        display:none;
-    }
-}
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 800px){
     
-    #menuA{
-    display:none;
-    }
-}
-
-@media screen and (max-width: 750px){
-    
-    .elivi {
-        display:none;
+    .menumov {
+        display: none;
+        
     }
     
     #menuA{
-        display:block;
+        display:inline;
     }  
 }
 
-@media screen and (max-width: 550px){
-    
+@media screen and (max-width: 400px){
+    .elivi{
+        display: none;
+    }
     #menuA{
         display:block;
-    }  
-    .SideMenu-input, .SideMenu-button{
-        width: 20%;
     }
-    .SideMenu-h1{
-        float: initial;
+    .menumov {
+        background:#6ee8ff;
+        display: block; 
+        
+    }
+    .showme{               
+        width: 13rem;
+        background-color:#6ee8ff;
+         
+    } 
+    li{
+        list-style:none;
+    }
+    nav a {
+        margin: 0px;
+        border-radius: 0px;
+        font-size: 13px;
+        padding: 5px; 
+        background-color:#6ee8ff; 
+        list-style:none; 
+    }
+    .hr{
+        width: 85.5%;
+        margin-left: 31px;
     }
 }
+
