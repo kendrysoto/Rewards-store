@@ -1,108 +1,118 @@
-import React, { useState, useEffect,useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import config from '../config.json';
 import headers from '../utils/HeadersRequired';
 import ProductReducer from '../reducers/productReducers';
-import userReducer from '../reducers/userReducer';
 import '../style/ProductList.css';
-
-
-
-
-
-const initialState1 = {
-    loading: true,
-    error: '',
-    posts: [],
-    users: [],
-}
-const initialState2 = {
-    loading: true,
-    error: '',
-    users: [],
-}
-
+import '../style/UsePagination.css';
+import customStyles from './customStyles';
+import Modal from 'react-modal';
 
 
 const HighestPrice = () => {
+    const initialState1 = {
+        loading: true,
+        error: '',
+        posts: [],
+        users: [],
+    }
     const [buy, setBuy] = useState({
         point: 0,
-		product: [],
-	});
+        product: [],
+    });
     const [state, dispatch] = useReducer(ProductReducer, initialState1)
+    const [isOpen, setIsOpen] = useState(false);
 
+    Modal.setAppElement('#root')
 
-	useEffect(() => {
-      
-        fetch( `${config.config.UrlBase}/user/me`, { headers })
-                
-             .then(response => response.json())
-             .then(jsondata => {
-                 setBuy({point: jsondata['points']})
-                 console.log(jsondata['points'])
-                 console.log(jsondata)
-             })
- 
-             .catch(error => {
-                 console.log(error)
-             });
-             
-             fetch( "https://coding-challenge-api.aerolab.co/products", { headers })
-        
-             .then(function (response) {
-                 return response.json();
-             }).then(function (data) {
-                 dispatch({ type: 'FETCH_SUCCESS', payload: data })
-                 console.log(data)
-             })
-             .catch(error => {
-                 dispatch({ type: 'FETCH_ERROR' })
-             });
-         }, []);
+    useEffect(() => {
 
-         const submitHandler = () => {
-          
-            fetch('https://private-anon-9a56df0539-aerolabchallenge.apiary-mock.com/redeem', {
-                method: 'POST',
-                mode: "cors",
-                redirect: 'follow',
-                body: JSON.stringify(
-                    { 'productId': buy.product }
-                ),
-                headers: {
-                    "content-type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWRkOWU5OTQ0NGZlNDAwNmRhOTkyNGQiLCJpYXQiOjE1OTE1ODIzNjF9.-f40dyUIGFsBSB_PTeBGdSLI58I21-QBJNi9wkODcKk"
-                }
+        fetch(`${config.config.UrlBase}/user/me`, { headers })
+
+            .then(response => response.json())
+            .then(jsondata => {
+                setBuy({ point: jsondata['points'] })
             })
-                .then(response => response.json())
-                .then(jsondata => {
-                    setBuy({ product: jsondata['productId'] })
-                    setBuy({ message: jsondata['message'] })
-                    console.log(jsondata['productId'])
-                    console.log(jsondata)
-                })
-    
-                .catch(error => {
-                    console.log(error)
-                })
-        }
 
+            .catch(error => {
+                console.log(error)
+            });
+
+        fetch(`${config.config.UrlBase}/products`, { headers })
+
+            .then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                dispatch({ type: 'FETCH_SUCCESS', payload: data })
+              
+            })
+            .catch(error => {
+                dispatch({ type: 'FETCH_ERROR' })
+            });
+    }, []);
+
+    const handleClose = () => {
+        setIsOpen(false);
+    };
+
+    const fechPoints = (id) => {
+        fetch(`${config.config.UrlBase}/redeem`, {
+            method: 'POST',
+            mode: "cors",
+            redirect: 'follow',
+            body: JSON.stringify(
+                { 'productId': id }
+
+            ),
+            headers: {
+                "content-type": "application/json",
+                "Accept": "application/json",
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWRkOWU5OTQ0NGZlNDAwNmRhOTkyNGQiLCJpYXQiOjE1OTE1ODIzNjF9.-f40dyUIGFsBSB_PTeBGdSLI58I21-QBJNi9wkODcKk"
+            }
+        })
+            .then(response => response.json())
+            .then(jsondata => {
+                setBuy({ product: jsondata['_id'] })
+                setBuy({ message: jsondata.message })
+                setBuy({ modal: true })
+                setIsOpen(true);
+            })
+
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     return (
         <div >
-             
-            {state.posts.filter(prices => prices.cost > 240).map(product => (
-                <div className="Category-container" key={product._id}>
-                     {product.cost > buy.point ? "Te faltan " + (product.cost - buy.point) : <button className="ProducList-button" onClick={submitHandler}> <img  className="product-img" src="https://i.ibb.co/JCghNXv/buy-white11.jpg" /> </button>}
-                    <img  className="ProducList-img" src={product.img.url} />
-                    {product.cost}
+            {state.posts.filter(prices => prices.cost > 240).map(pro => (
+                <div className="Category-container" key={pro._id}>
+                    {pro.cost > buy.point
+                        ? <div className="ProducList-point"  >
+                            <p className="point-p">Te faltan  {(pro.cost - buy.point)} puntos</p>
+                        </div>
+                        : <div>
+                            <button className="ProducList-button" onClick={() => fechPoints(pro._id)}>
+                                <img className="product-img" src="https://i.ibb.co/JCghNXv/buy-white11.jpg" />
+                            </button>
+                        </div>
+                    }
+                    <img className="ProducList-img" src={pro.img.url} />
                     <hr className="hr2"></hr>
-                    <p className="ProducList-category">{product.category}</p>
-                    <h3 className="ProducList-name">{product.name}</h3>
+                    <p className="ProducList-category">{pro.category}</p>
+                    <h3 className="ProducList-name">{pro.name}</h3>
+                    <Modal
+                        isOpen={isOpen}
+                        contentLabel="Selected Option"
+                        closeTimeoutMS={200}
+                        style={customStyles}
+                    >
+                        <h1 className="message" >
+                            your exchange was successful</h1>
+                        <img className="modal-img" src="https://i.ibb.co/sjCh9S5/happy3333333.jpg" />
+                        <button className="modal-button" onClick={handleClose}>close</button>
+                    </Modal>
                 </div>
             ))}
-
-
         </div>
     )
 }

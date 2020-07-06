@@ -3,6 +3,8 @@ import config from '../config.json';
 import headers from '../utils/HeadersRequired';
 import userReducer from '../reducers/userReducer';
 import '../style/User.css';
+import UsePagination from './UsePagination';
+
 
 
 const History = () => {
@@ -27,21 +29,14 @@ const History = () => {
             })
     }, []);
 
-
-
-
-
     return (
-        <div >
-
-            {state.historial.map((hist) =>
-                <div className="Category-container" key={hist._id}>
-                    <img className="ProducList-img" src={hist.img.url} />
-                    <hr className="hr2"></hr>
-                    <p className="ProducList-category">{hist.category}</p>
-                    <h3 className="ProducList-name">{hist.name}</h3>
-                </div>
-            )}
+        <div>
+            <UsePagination
+                data={state.historial}
+                itemsPerPage={16}
+                
+            >
+            </UsePagination>
         </div>
     )
 }

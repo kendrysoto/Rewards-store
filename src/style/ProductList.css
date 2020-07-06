@@ -6,21 +6,16 @@
 }
 
 .point-p{
-    padding: 5px;
-   
+    padding: 5px;  
 }
 
 .ProducList-point{
    margin-left: 15px;
    border-radius: 30px;
- 
-    margin-top: 18px;
-    width: 60%;
-    background-color: khaki;
-    
-    
+   margin-top: 18px;
+   width: 60%;
+   background-color: khaki; 
 }
-
 
 .ProducList-button{
     background-color: white;
@@ -35,7 +30,6 @@
     float: right;
     width: 100%;
     height:auto ;
-    
     margin-right: 3px;
 }
 
@@ -43,6 +37,7 @@
     width: 86%;
     margin-left: 13px;
 }
+
 .ProducList-category{
     margin: 0px;
     text-align: left;
@@ -56,8 +51,8 @@
     font-size: 16px; 
     font-weight: bold;
     margin-top: 4px;
-  
 }
+
 .Category-container{
     color:#203A43; 
     text-align: center;
@@ -69,8 +64,8 @@
     height:auto;
     position:relative;
     margin:10px;
-   left: 80px;
-   top: 15px;
+    left: 80px;
+    top: 15px;
     float: left;
     border-style:outset;
     border-width: 2px;

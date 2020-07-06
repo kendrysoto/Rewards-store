@@ -7,7 +7,6 @@ import '../style/ProductList.css';
 import UsePagination from './UsePagination';
 
 
-
 const ProductList = () => {
     const initialState = {
         loading: true,
@@ -21,11 +20,13 @@ const ProductList = () => {
         point: 0,
         product: [],
         mesagge: '',
+        modal: false
     });
+    const [isOpen, setIsOpen] = useState(false);
+
 
     useEffect(() => {
         fetch(`${config.config.UrlBase}/user/me`, { headers })
-
             .then(response => response.json())
             .then(jsondata => {
                 setBuy({ point: jsondata['points'] })
@@ -34,21 +35,25 @@ const ProductList = () => {
                 console.log(error)
             });
 
-        fetch("https://coding-challenge-api.aerolab.co/products", { headers })
+        fetch(`${config.config.UrlBase}/products`, { headers })
 
             .then(function (response) {
                 return response.json();
             }).then(function (data) {
                 dispatch({ type: 'FETCH_SUCCESS', payload: data })
-                console.log(data)
+                
             })
             .catch(error => {
                 dispatch({ type: 'FETCH_ERROR' })
             });
     }, []);
 
+    const handleClose = () => {
+        setIsOpen(false);
+    };
+
     const fechPoints = (id) => {
-        fetch('https://coding-challenge-api.aerolab.co/redeem', {
+        fetch(`${config.config.UrlBase}/redeem`, {
             method: 'POST',
             mode: "cors",
             redirect: 'follow',
@@ -65,7 +70,9 @@ const ProductList = () => {
             .then(response => response.json())
             .then(jsondata => {
                 setBuy({ product: jsondata['_id'] })
-                setBuy({ message: jsondata['message'] })
+                setBuy({ message: jsondata.message })
+                setBuy({ modal: true })
+                setIsOpen(true);
             })
 
             .catch(error => {
@@ -74,11 +81,16 @@ const ProductList = () => {
     }
 
     return (
-
         <div>
-            
-            <UsePagination  data={state.posts} itemsPerPage={itemsPerPage2}  buy={buy} fechPoints={fechPoints}/>
-            
+            <UsePagination
+                data={state.posts}
+                itemsPerPage={itemsPerPage2}
+                isOpen={isOpen}
+                buy={buy}
+                fechPoints={fechPoints}
+                handleClose={handleClose}
+            >
+            </UsePagination>
         </div>
     )
 }

@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import config from '../config.json';
-import headers from '../utils/HeadersRequired';
+import React, { useState } from 'react';
 import '../style/Points.css';
 
 
@@ -11,16 +9,16 @@ const Points = () => {
         amount2: 5000,
         amount3: 7500,
         mesagge: '',
+        actualAmount: 0
     });
 
-
-    const fechPoints = () => {
+    const fechPoints = (actualAmount) => {
         fetch('https://coding-challenge-api.aerolab.co/user/points', {
             method: 'POST',
             mode: "cors",
             redirect: 'follow',
             body: JSON.stringify(
-                { 'amount': parseInt([point.amount1, point.amount2, point.amount3]) }
+                { 'amount': parseInt(actualAmount) }
             ),
             headers: {
                 "content-type": "application/json",
@@ -38,23 +36,22 @@ const Points = () => {
             })
     }
 
-
     return (
         <div className="points-box">
             <div>
                 <h2 className="points-h3">Add your points</h2>
-                <select className="points-select">
-                    <option value={point.amount1} selected>1000</option>
+                <select onChange={(e) => setPoint({actualAmount: e.target.value})} className="points-select">
+                    <option value={point.amount1} >1000</option>
                     <option value={point.amount2} >5000</option>
                     <option value={point.amount3}>7500</option>
                 </select>
             </div>
+            
             <button
                 className="points-button"
-                onClick={fechPoints}>click</button>
+                onClick={() => fechPoints(point.actualAmount)}>click</button>
             <p className="points-message">{point.message}</p>
         </div>
-
     )
 }
 export default Points;

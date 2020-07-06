@@ -13,7 +13,8 @@ const Main = () => {
   return (
     <div className="main-box">
       <Switch>
-        <Route path="/ProductList" component={ProductList} />
+        <Route exact path="/" component={ProductList} />
+        <Route exact path="/rewards-store" component={ProductList} />
         <Route path="/Points" component={Points} />
         <Route path="/LowestPrice" component={LowestPrice} />
         <Route path="/HighestPrice" component={HighestPrice} />
