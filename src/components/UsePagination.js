@@ -7,7 +7,7 @@ import customStyles from './customStyles';
 const UsePagination = (data) => {
 
   const [currentPage, setCurrentPage] = useState(1);
-  const maxPage = Math.ceil(data.data.length / 16);
+  const maxPage = Math.ceil(data.data.length/ 16);
   Modal.setAppElement('#root')
 
   function currentData() {

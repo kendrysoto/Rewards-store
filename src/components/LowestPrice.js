@@ -6,9 +6,11 @@ import Modal from 'react-modal';
 import '../style/ProductList.css';
 import '../style/UsePagination.css';
 import customStyles from './customStyles';
+import { connect } from 'react-redux'
+import { fetchProduct } from '../redux/AsyncActions';
 
 
-const LowestPrice = () => {
+const LowestPrice = ({fetchProduct, Data}) => {
     const initialState1 = {
         loading: true,
         error: '',
@@ -26,6 +28,7 @@ const LowestPrice = () => {
 
 
     useEffect(() => {
+        fetchProduct()
 
         fetch(`${config.config.UrlBase}/user/me`, { headers })
 
@@ -38,17 +41,7 @@ const LowestPrice = () => {
                 console.log(error)
             });
 
-        fetch(`${config.config.UrlBase}/products`, { headers })
-
-            .then(function (response) {
-                return response.json();
-            }).then(function (data) {
-                dispatch({ type: 'FETCH_SUCCESS', payload: data })
-                
-            })
-            .catch(error => {
-                dispatch({ type: 'FETCH_ERROR' })
-            });
+       
     }, []);
 
     const handleClose = () => {
@@ -85,7 +78,7 @@ const LowestPrice = () => {
 
     return (
         <div >
-            {state.posts.filter(prices => prices.cost < 240).map(pro => (
+            {Data.filter(prices => prices.cost < 240).map(pro => (
                 <div className="Category-container" key={pro._id}>
                     {pro.cost > buy.point
                         ? <div className="ProducList-point"  >
@@ -118,4 +111,23 @@ const LowestPrice = () => {
     )
 }
 
-export default LowestPrice;
+const mapStatetoProps = state => {
+    return {
+      Data: state.product,
+      loading: state.loading,
+      error: state.error
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+        fetchProduct: () => dispatch(fetchProduct())
+    }
+  }
+  
+  export default connect(
+    mapStatetoProps,
+    mapDispatchToProps
+  )(LowestPrice);
+
+

@@ -33,8 +33,7 @@ const History = () => {
         <div>
             <UsePagination
                 data={state.historial}
-                itemsPerPage={16}
-                
+                itemsPerPage={16} 
             >
             </UsePagination>
         </div>

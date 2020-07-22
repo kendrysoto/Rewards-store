@@ -6,9 +6,12 @@ import '../style/ProductList.css';
 import '../style/UsePagination.css';
 import customStyles from './customStyles';
 import Modal from 'react-modal';
+import { connect } from 'react-redux'
+import { fetchProduct } from '../redux/AsyncActions';
 
 
-const HighestPrice = () => {
+
+export const HighestPrice = ({fetchProduct, Data}) => {
     const initialState1 = {
         loading: true,
         error: '',
@@ -25,6 +28,7 @@ const HighestPrice = () => {
     Modal.setAppElement('#root')
 
     useEffect(() => {
+        fetchProduct()
 
         fetch(`${config.config.UrlBase}/user/me`, { headers })
 
@@ -37,17 +41,7 @@ const HighestPrice = () => {
                 console.log(error)
             });
 
-        fetch(`${config.config.UrlBase}/products`, { headers })
-
-            .then(function (response) {
-                return response.json();
-            }).then(function (data) {
-                dispatch({ type: 'FETCH_SUCCESS', payload: data })
-              
-            })
-            .catch(error => {
-                dispatch({ type: 'FETCH_ERROR' })
-            });
+        
     }, []);
 
     const handleClose = () => {
@@ -84,7 +78,7 @@ const HighestPrice = () => {
 
     return (
         <div >
-            {state.posts.filter(prices => prices.cost > 240).map(pro => (
+            {Data.filter(prices => prices.cost > 240).map(pro => (
                 <div className="Category-container" key={pro._id}>
                     {pro.cost > buy.point
                         ? <div className="ProducList-point"  >
@@ -117,7 +111,25 @@ const HighestPrice = () => {
     )
 }
 
-export default HighestPrice;
+const mapStatetoProps = state => {
+    return {
+      Data: state.product,
+      loading: state.loading,
+      error: state.error
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+        fetchProduct: () => dispatch(fetchProduct())
+    }
+  }
+  
+  export default connect(
+    mapStatetoProps,
+    mapDispatchToProps
+  )(HighestPrice);
+
 
 
 

@@ -16,7 +16,6 @@
  
 }
 
-
 .box-next{
   float: right;
   margin-left: 900px;
@@ -44,8 +43,6 @@
 
 .modal-button{
   background-color: #f4ed01;
-  
-
   font-size: 20px;
   padding: 10px;
   border-radius: 30px;
@@ -59,16 +56,13 @@
  @media screen and (max-width: 800px) {   
   .box-prev{
     float: left;
-    
     position: relative;
     top: 450px;
-   left: 1px;
-     right: 8000px;
+    left: 1px;
+    right: 8000px;
     margin: 5px;
     width: 8%;
-   
   }
-  
   
   .box-next{
     float: right;
@@ -87,13 +81,12 @@
     margin-right: 10px;
     position: relative;
     top: 10px;
-   left: 29px;
+    left: 29px;
     right: 30px;
     margin: 5px;
     width: 14%;
    
   }
-  
   
   .box-next{
     float: right;

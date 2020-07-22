@@ -5,9 +5,11 @@ import '../style/User.css';
 import ProductReducer from '../reducers/productReducers';
 import '../style/ProductList.css';
 import UsePagination from './UsePagination';
+import { connect } from 'react-redux'
+import { fetchProduct } from '../redux/AsyncActions';
 
 
-const ProductList = () => {
+const ProductList = ({fetchProduct,Data }) => {
     const initialState = {
         loading: true,
         error: '',
@@ -26,6 +28,7 @@ const ProductList = () => {
 
 
     useEffect(() => {
+        fetchProduct()
         fetch(`${config.config.UrlBase}/user/me`, { headers })
             .then(response => response.json())
             .then(jsondata => {
@@ -35,17 +38,7 @@ const ProductList = () => {
                 console.log(error)
             });
 
-        fetch(`${config.config.UrlBase}/products`, { headers })
-
-            .then(function (response) {
-                return response.json();
-            }).then(function (data) {
-                dispatch({ type: 'FETCH_SUCCESS', payload: data })
-                
-            })
-            .catch(error => {
-                dispatch({ type: 'FETCH_ERROR' })
-            });
+       
     }, []);
 
     const handleClose = () => {
@@ -83,17 +76,35 @@ const ProductList = () => {
     return (
         <div>
             <UsePagination
-                data={state.posts}
+                data={Data}
                 itemsPerPage={itemsPerPage2}
                 isOpen={isOpen}
                 buy={buy}
                 fechPoints={fechPoints}
                 handleClose={handleClose}
+             
             >
             </UsePagination>
         </div>
     )
 }
 
-export default ProductList;
+const mapStatetoProps = state => {
+    return {
+      Data: state.product,
+      loading: state.loading,
+      error: state.error
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+        fetchProduct: () => dispatch(fetchProduct())
+    }
+  }
+  
+  export default connect(
+    mapStatetoProps,
+    mapDispatchToProps
+  )(ProductList);
 

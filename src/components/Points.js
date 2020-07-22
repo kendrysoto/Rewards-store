@@ -40,13 +40,14 @@ const Points = () => {
         <div className="points-box">
             <div>
                 <h2 className="points-h3">Add your points</h2>
-                <select onChange={(e) => setPoint({actualAmount: e.target.value})} className="points-select">
+                <select onChange={(e) => setPoint({ actualAmount: e.target.value })} className="points-select">
+                <option value={point.amount1} >select</option>
                     <option value={point.amount1} >1000</option>
                     <option value={point.amount2} >5000</option>
-                    <option value={point.amount3}>7500</option>
+                    <option value={point.amount3} >7500</option>
                 </select>
             </div>
-            
+
             <button
                 className="points-button"
                 onClick={() => fechPoints(point.actualAmount)}>click</button>

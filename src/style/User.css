@@ -33,17 +33,14 @@
     }
 
     .users-name{
-       
         margin-top: 15px; 
         margin-left: 615px; 
     }
 
     .users-points{
-       
        width: 10%;
        height: auto;
-
-        margin-right: 20px;
+       margin-right: 20px;
      }
 }
 
@@ -53,16 +50,13 @@
     }
 
     .users-name{
-       
         margin-top: 15px; 
         margin-left: 240px; 
     }
 
     .users-points{
-       
        width: 16%;
        height: auto;
-
-        margin-right: 20px;
+       margin-right: 20px;
      }
 }
